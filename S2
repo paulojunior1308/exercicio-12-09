@@ -1,0 +1,168 @@
+S2
+enable
+configure terminal
+hostname S2
+banner motd "APENAS PESSOAS AUTORIZADAS!"
+enable secret SenhaEnable
+vlan 50
+exit
+interface vlan 50
+ip address 10.0.127.254 255.255.128.0
+description "VLAN 50 PORTAS 1 - 20"
+no shutdown
+exit
+interface f0/1
+switchport mode access
+switchport access vlan 50
+no shutdown
+exit
+interface f0/2
+switchport mode access
+switchport access vlan 50
+no shutdown
+exit
+interface f0/3
+switchport mode access
+switchport access vlan 50
+no shutdown
+exit
+interface f0/4
+switchport mode access
+switchport access vlan 50
+no shutdown
+exit
+interface f0/5
+switchport mode access
+switchport access vlan 50
+no shutdown
+exit
+interface f0/6
+switchport mode access
+switchport access vlan 50
+no shutdown
+exit
+interface f0/7
+switchport mode access
+switchport access vlan 50
+no shutdown
+exit
+interface f0/8
+switchport mode access
+switchport access vlan 50
+no shutdown
+exit
+interface f0/9
+switchport mode access
+switchport access vlan 50
+no shutdown
+exit
+interface f0/10
+switchport mode access
+switchport access vlan 50
+no shutdown
+exit
+interface f0/11
+switchport mode access
+switchport access vlan 50
+no shutdown
+exit
+interface f0/12
+switchport mode access
+switchport access vlan 50
+no shutdown
+exit
+interface f0/13
+switchport mode access
+switchport access vlan 50
+no shutdown
+exit
+interface f0/14
+switchport mode access
+switchport access vlan 50
+no shutdown
+exit
+interface f0/15
+switchport mode access
+switchport access vlan 50
+no shutdown
+exit
+interface f0/16
+switchport mode access
+switchport access vlan 50
+no shutdown
+exit
+interface f0/17
+switchport mode access
+switchport access vlan 50
+no shutdown
+exit
+interface f0/18
+switchport mode access
+switchport access vlan 50
+no shutdown
+exit
+interface f0/19
+switchport mode access
+switchport access vlan 50
+no shutdown
+exit
+interface f0/20
+switchport mode access
+switchport access vlan 50
+no shutdown
+exit
+vlan 40
+exit
+interface vlan 60
+ip address 10.0.159.254 255.255.224.0
+description "VLAN 60 PORTA 24"
+no shutdown
+exit
+interface f0/24
+switchport mode access
+switchport access vlan 60
+no shutdown
+exit
+vlan 70
+exit
+interface vlan 70
+ip address 10.0.167.254 255.255.248.0
+description "VLAN 70 PORTA 21,23"
+no shutdown
+exit
+interface f0/21
+switchport mode access
+switchport access vlan 70
+no shutdown
+exit
+interface f0/23
+switchport mode access
+switchport access vlan 70
+no shutdown
+exit
+vlan 80
+exit
+interface vlan 80
+ip address 10.0.169.254 255.255.254.0
+description "VLAN 80 PORTA 22"
+no shutdown
+exit
+interface f0/22
+switchport mode access
+switchport access vlan 80
+no shutdown
+username administrador privilege 15 secret SenhaAdm
+username estagiario privilege 1 secret SenhaEst
+line console 0
+password SenhadaConsole
+login
+exit
+service password-encryption
+line vty 0 15
+password SenhadaVTY
+transport input ssh
+exec-timeout 10
+login local
+exit
+ip default-gateway 10.0.0.1
+exit

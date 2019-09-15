@@ -1,0 +1,81 @@
+R2
+enable
+configure terminal
+hostname R2
+banner motd "APENAS PESSOAS AUTORIZADAS!"
+enable secret SenhaEnable
+interface g0/1
+ip address 10.0.0.1 255.255.128.0
+description "REDE 2 10.0.0.0"
+no shutdown
+exit
+interface serial 0/0/1
+ip address 201.187.89.6 255.255.255.252
+description "REDE EXTERNA 201.187.89.4/30
+no shutdown
+exit
+interface serial 0/0/0
+ip address 201.187.89.9 255.255.255.252
+description "REDE EXTERNA 201.187.89.8/30
+no shutdown
+exit
+interface serial 0/1/1
+ip address 201.187.89.17 255.255.255.252
+description "REDE EXTERNA 201.187.89.16/30
+no shutdown
+exit
+line console 0
+password SenhadaConsole
+login
+exit
+line vty 0 15
+password SenhadaVTY
+transport input ssh
+exec-timeout 10
+login local
+exit
+username administrador privilege 15 secret SenhaAdm
+username estagiario privilege 1 secret SenhaEst
+service password-encryption
+do wr
+interface g0/0.50
+encapsulation dot1q 50
+ip address 10.0.0.1 255.0.0.0
+exit
+interface g0/0.60
+encapsulation dot1q 60
+ip address 10.0.0.1 255.0.0.0
+exit
+interface g0/0.70
+encapsulation dot1q 70
+ip address 10.0.0.1 255.0.0.0
+exit
+interface g0/0.80
+encapsulation dot1q 80
+ip address 10.0.0.1 255.0.0.0
+exit
+ip route 201.87.89.0 255.255.255.252 201.187.89.5
+ip route 201.87.89.0 255.255.255.252 201.187.89.18
+ip route 201.87.89.0 255.255.255.252 201.187.89.10
+
+ip route 201.87.89.12 255.255.255.252 201.187.89.10
+ip route 201.87.89.12 255.255.255.252 201.187.89.18
+ip route 201.87.89.12 255.255.255.252 201.187.89.5
+
+ip route 201.87.89.20 255.255.255.252 201.187.89.5
+ip route 201.87.89.20 255.255.255.252 201.187.89.18
+ip route 201.87.89.20 255.255.255.252 201.187.89.10
+
+ip route 192.168.0.0 255.255.224.0 201.187.89.5
+ip route 192.168.0.0 255.255.224.0 201.187.89.18
+ip route 192.168.0.0 255.255.224.0 201.187.89.10
+
+ip route 172.16.0.0 255.240.0.0 201.187.89.5
+ip route 172.16.0.0 255.240.0.0 201.187.89.18
+ip route 172.16.0.0 255.240.0.0 201.187.89.10
+
+ip route 192.168.32.0 255.255.248.0 201.187.89.5
+ip route 192.168.32.0 255.255.248.0 201.187.89.18
+ip route 192.168.32.0 255.255.248.0 201.187.89.10
+
+do wr

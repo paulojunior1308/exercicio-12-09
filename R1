@@ -1,0 +1,81 @@
+R1
+enable
+configure terminal
+hostname R1
+banner motd "APENAS PESSOAS AUTORIZADAS!"
+enable secret SenhaEnable
+interface g0/1
+ip address 192.168.0.1 255.255.224.0
+description "REDE 1 192.168.0.0/19"
+no shutdown
+exit
+interface serial 0/0/1
+ip address 201.187.89.5 255.255.255.252
+description "REDE EXTERNA 201.187.89.4/30
+no shutdown
+exit
+interface serial 0/0/0
+ip address 201.187.89.1 255.255.255.252
+description "REDE EXTERNA 201.187.89.0/30
+no shutdown
+exit
+interface serial 0/1/1
+ip address 201.187.89.21 255.255.255.252
+description "REDE EXTERNA 201.187.89.20/30
+no shutdown
+exit
+line console 0
+password SenhadaConsole
+login
+exit
+line vty 0 15
+password SenhadaVTY
+transport input ssh
+exec-timeout 10
+login local
+exit
+username administrador privilege 15 secret SenhaAdm
+username estagiario privilege 1 secret SenhaEst
+service password-encryption
+do wr
+interface g0/0.10
+encapsulation dot1q 10
+ip address 192.168.0.1 255.255.224.0
+exit
+interface g0/0.20
+encapsulation dot1q 20
+ip address 192.168.0.1 255.255.224.0
+exit
+interface g0/0.30
+encapsulation dot1q 30
+ip address 192.168.0.1 255.255.224.0
+exit
+interface g0/0.40
+encapsulation dot1q 40
+ip address 192.168.0.1 255.255.224.0
+exit
+ip route 201.87.89.8 255.255.255.252 201.187.89.6
+ip route 201.87.89.8 255.255.255.252 201.187.89.22
+ip route 201.87.89.8 255.255.255.252 201.187.89.2
+
+ip route 201.87.89.12 255.255.255.252 201.187.89.6
+ip route 201.87.89.12 255.255.255.252 201.187.89.22
+ip route 201.87.89.12 255.255.255.252 201.187.89.2
+
+ip route 201.87.89.16 255.255.255.252 201.187.89.6
+ip route 201.87.89.16 255.255.255.252 201.187.89.22
+ip route 201.87.89.16 255.255.255.252 201.187.89.2
+
+ip route 10.0.0.0 255.0.0.0 201.187.89.6
+ip route 10.0.0.0 255.0.0.0 201.187.89.22
+ip route 10.0.0.0 255.0.0.0 201.187.89.2
+
+ip route 172.16.0.0 255.240.0.0 201.187.89.6
+ip route 172.16.0.0 255.240.0.0 201.187.89.22
+ip route 172.16.0.0 255.240.0.0 201.187.89.2
+
+ip route 192.168.32.0 255.255.248.0 201.187.89.6
+ip route 192.168.32.0 255.255.248.0 201.187.89.22
+ip route 192.168.32.0 255.255.248.0 201.187.89.2
+
+do wr

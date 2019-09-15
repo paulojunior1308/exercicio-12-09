@@ -1,0 +1,169 @@
+S4
+enable
+configure terminal
+hostname S4
+banner motd "APENAS PESSOAS AUTORIZADAS!"
+enable secret SenhaEnable
+vlan 88
+exit
+interface vlan 88
+ip address 172.22.255.254 255.254.0.0
+description "VLAN 88 PORTAS 1 - 9"
+no shutdown
+exit
+interface f0/1
+switchport mode access
+switchport access vlan 88
+no shutdown
+exit
+interface f0/2
+switchport mode access
+switchport access vlan 88
+no shutdown
+exit
+interface f0/3
+switchport mode access
+switchport access vlan 88
+no shutdown
+exit
+interface f0/4
+switchport mode access
+switchport access vlan 88
+no shutdown
+exit
+interface f0/5
+switchport mode access
+switchport access vlan 88
+no shutdown
+exit
+interface f0/6
+switchport mode access
+switchport access vlan 88
+no shutdown
+exit
+interface f0/7
+switchport mode access
+switchport access vlan 88
+no shutdown
+exit
+interface f0/8
+switchport mode access
+switchport access vlan 88
+no shutdown
+exit
+interface f0/9
+switchport mode access
+switchport access vlan 88
+no shutdown
+exit
+vlan 200
+exit
+interface vlan 200
+ip address 172.24.63.254 255.255.192.0
+description "VLAN 200 PORTAS 10 - 12"
+no shutdown
+exit
+interface f0/10
+switchport mode access
+switchport access vlan 200
+no shutdown
+exit
+interface f0/11
+switchport mode access
+switchport access vlan 200
+no shutdown
+exit
+interface f0/12
+switchport mode access
+switchport access vlan 200
+no shutdown
+exit
+vlan 90
+exit
+interface vlan 90
+ip address 172.24.65.254 255.255.254.0
+description "VLAN 90 PORTAS 13 - 14"
+no shutdown
+exit
+interface f0/13
+switchport mode access
+switchport access vlan 90
+no shutdown
+exit
+interface f0/14
+switchport mode access
+switchport access vlan 90
+no shutdown
+exit
+vlan 88
+exit
+interface vlan 88
+ip address 172.21.255.254 255.240.0.0
+description "VLAN 88 PORTAS 15 - 24"
+no shutdown
+exit
+interface f0/15
+switchport mode access
+switchport access vlan 88
+no shutdown
+exit
+interface f0/16
+switchport mode access
+switchport access vlan 88
+no shutdown
+exit
+interface f0/17
+switchport mode access
+switchport access vlan 88
+no shutdown
+exit
+interface f0/18
+switchport mode access
+switchport access vlan 88
+no shutdown
+exit
+interface f0/19
+switchport mode access
+switchport access vlan 88
+no shutdown
+exit
+interface f0/20
+switchport mode access
+switchport access vlan 88
+no shutdown
+exit
+interface f0/21
+switchport mode access
+switchport access vlan 88
+no shutdown
+exit
+interface f0/22
+switchport mode access
+switchport access vlan 88
+no shutdown
+exit
+interface f0/23
+switchport mode access
+switchport access vlan 88
+no shutdown
+exit
+interface f0/24
+switchport mode access
+switchport access vlan 88
+no shutdown
+exit
+username administrador privilege 15 secret SenhaAdm
+username estagiario privilege 1 secret SenhaEst
+line console 0
+password SenhadaConsole
+login
+exit
+service password-encryption
+line vty 0 15
+password SenhadaVTY
+transport input ssh
+exec-timeout 10
+login local
+exit
+ip default-gateway 172.6.0.1
+do wr
